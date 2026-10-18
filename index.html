@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Profil Mahasiswa — Muhammad Ikhsan Noufal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <img class="avatar" src="ikhsan.jpeg" alt="Foto Muhammad Ikhsan Noufal">
+    <div class="head-text">
+      <h1>Profil Mahasiswa</h1>
+      <p id="headSub"></p>
+    </div>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="Ganti tema terang/gelap" title="Ganti tema">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </header>
+
+  <nav class="nav" aria-label="Menu profil">
+    <div class="box">
+      <ul id="menu">
+        <li><a href="#biodata" aria-current="page">Biodata</a></li>
+        <li><a href="#pendidikan">Pendidikan</a></li>
+        <li><a href="#pengalaman">Pengalaman</a></li>
+        <li><a href="#keahlian">Keahlian</a></li>
+        <li><a href="#publikasi">Publikasi</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="box">
+      <section id="biodata">
+        <h2>Biodata</h2>
+        <dl class="facts" id="isi-biodata"></dl>
+      </section>
+
+      <section id="pendidikan" hidden>
+        <h2>Pendidikan</h2>
+        <dl class="facts" id="isi-pendidikan"></dl>
+      </section>
+
+      <section id="pengalaman" hidden>
+        <h2>Pengalaman</h2>
+        <dl class="facts" id="isi-pengalaman"></dl>
+      </section>
+
+      <section id="keahlian" hidden>
+        <h2>Keahlian</h2>
+        <dl class="facts" id="isi-keahlian"></dl>
+      </section>
+
+      <section id="publikasi" hidden>
+        <h2>Publikasi</h2>
+        <dl class="facts" id="isi-publikasi"></dl>
+      </section>
+    </div>
+  </main>
+
+  <aside class="aside" aria-label="Informasi tambahan">
+    <div class="box">
+      <h2>Hobi</h2>
+      <ul id="hobi"></ul>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="social" id="social"></div>
+    <p class="copy">&copy; Copyright <span id="year">2026</span> All Rights Reserved</p>
+    <div class="brand"><strong id="siteName">ProfilKu</strong><span id="slogan"></span></div>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   DATA PROFIL — ganti isi objek ini dengan data Anda sendiri
+   Setiap baris berbentuk ["label", "isi"]
+   ============================================================ */
+const DATA = {
+  namaWeb: "Ikhsannnfl",
+  slogan: "Web Profil Muhammad Ikhsan Noufal",
+  inisial: "MN",
+  subjudul: "Muhammad Ikhsan Noufal",
+
+  biodata: [
+    ["NIM", "2025081009"],
+    ["Nama", "Muhammad Ikhsan Noufal"],
+    ["Agama", "Islam"],
+    ["Tanggal Lahir", "24 Mei 2007"],
+    ["Tempat Lahir", "Tangerang"]
+  ],
+  pendidikan: [
+    ["S1", "Sistem Informasi - Universitas Pembangunan Jaya, 2025 - sekarang"],
+    ["SMA / SMK", "SMK Pustek Serpong, 2022 - 2025"],
+    ["SMP", "SMPN 22 Tanggerang Selatan, 2019 - 2022"],
+    ["SD", "SDN Jelupang 03, 2013 - 2019"]
+  ],
+  pengalaman: [
+    ["2024-2025", "Panitia Lomba Agustusan, Karang Taruna"],
+    ["2025", "Keamanan, ZewaFest (Concordia)"],
+    ["2026", "Perlengkapan, ProdiGathtering(Himasif)"]
+  ],
+  keahlian: [
+    ["Keahlian 1", "Menguasai dasar-dasar HTML dan CSS"],
+    ["Keahlian 2", "Menguasai dasar-dasar Jaringan Komputer"],
+    ["Keahlian 3", "Menguasai dasar-dasar Ms Word"],
+    ["Keahlian 4", "Mampu bekerja sama dengan tim"]
+  ],
+  publikasi: [
+   
+  ],
+
+  hobi: ["Sepak bola", "Game", "Jogging"],
+  sosial: [["Instagram", "@ikhsannnfl"], ["TikTok", "@sannnfl"]]
+};
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+/* Satu fungsi untuk semua bagian: label di kiri, isi di kanan */
+function isi(id, data) {
+  $(id).innerHTML = data.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
+}
+isi("#isi-biodata", DATA.biodata);
+isi("#isi-pendidikan", DATA.pendidikan);
+isi("#isi-pengalaman", DATA.pengalaman);
+isi("#isi-keahlian", DATA.keahlian);
+isi("#isi-publikasi", DATA.publikasi);
+
+
+$("#headSub").textContent = DATA.subjudul;
+$("#siteName").textContent = DATA.namaWeb;
+$("#slogan").textContent = DATA.slogan;
+$("#year").textContent = new Date().getFullYear();
+$("#hobi").innerHTML = DATA.hobi.map(h => `<li>${esc(h)}</li>`).join("");
+$("#social").innerHTML = DATA.sosial.map(([k, v]) => `<span>${esc(k)}: <b>${esc(v)}</b></span>`).join("");
+
+/* Pindah isi saat menu diklik */
+const panels = ["biodata", "pendidikan", "pengalaman", "keahlian", "publikasi"];
+function show(id) {
+  panels.forEach(p => { $("#" + p).hidden = p !== id; });
+  document.querySelectorAll("#menu a").forEach(a => {
+    if (a.getAttribute("href") === "#" + id) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
+  });
+}
+$("#menu").addEventListener("click", e => {
+  const a = e.target.closest("a");
+  if (!a) return;
+  e.preventDefault();
+  show(a.getAttribute("href").slice(1));
+});
+
+/* Tema terang/gelap */
+const effectiveDark = () => {
+  const t = document.documentElement.dataset.theme;
+  return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+};
+try { const s = localStorage.getItem("profil-tema"); if (s) document.documentElement.dataset.theme = s; } catch (_) {}
+$("#themeBtn").addEventListener("click", () => {
+  const next = effectiveDark() ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem("profil-tema", next); } catch (_) {}
+});
+</script>
+</body>
+</html>
